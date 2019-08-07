@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
-
+import React, { Component } from "react";
+import { Container } from "reactstrap";
 
 class UnixPage extends Component {
   render() {
-    return (
-      <div>
-        coucou unix
-      </div>
-    )
+    return <Container>coucou unix</Container>;
   }
 }
 

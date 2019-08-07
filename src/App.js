@@ -13,7 +13,7 @@ class App extends Component {
         render={({ location, history }) => (
           <React.Fragment>
             <SideNav
-              style={{ background: "black" }}
+              style={{ background: "lightgrey" }}
               onSelect={selected => {
                 const to = "/" + selected;
                 if (location.pathname !== to) {
@@ -24,13 +24,13 @@ class App extends Component {
               <SideNav.Toggle />
               <SideNav.Nav defaultSelected="home">
                 <NavItem eventKey="">
-                  <NavIcon style={{ color: "white" }}>
+                  <NavIcon>
                     <i
                       className="fab fa-linux"
-                      style={{ fontSize: "1.75em" }}
+                      style={{ fontSize: "1.75em", color: "black" }}
                     />
                   </NavIcon>
-                  <NavText>Unix</NavText>
+                  <NavText style={{ color: "white" }}>Unix</NavText>
                 </NavItem>
               </SideNav.Nav>
             </SideNav>
