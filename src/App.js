@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import "./App.css";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import SideNav, { NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
+import SideNav, { NavItem, NavIcon, NavText, Toggle, Nav } from "@trendmicro/react-sidenav";
 
-import UnixPage from "./components/UnixPage";
+import MainPage from "./components/MainPage";
 
 class App extends Component {
   render() {
     return (
       <Route
         render={({ location, history }) => (
-          <React.Fragment>
+          <>
             <SideNav
               style={{ background: "lightgrey" }}
               onSelect={selected => {
@@ -21,9 +21,9 @@ class App extends Component {
                 }
               }}
             >
-              <SideNav.Toggle />
-              <SideNav.Nav defaultSelected="home">
-                <NavItem eventKey="">
+              <Toggle />
+              <Nav defaultSelected="home">
+                <NavItem eventKey="home">
                   <NavIcon>
                     <i
                       className="fab fa-linux"
@@ -32,12 +32,12 @@ class App extends Component {
                   </NavIcon>
                   <NavText style={{ color: "white" }}>Unix</NavText>
                 </NavItem>
-              </SideNav.Nav>
+              </Nav>
             </SideNav>
             <main>
-              <Route path="/" exact component={UnixPage} />
+              <Route path="/" exact component={MainPage} />
             </main>
-          </React.Fragment>
+          </>
         )}
       />
     );
