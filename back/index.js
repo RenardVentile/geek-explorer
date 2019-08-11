@@ -15,10 +15,10 @@ app.get('/', function (req, res) {
 })
 
 //First Option
-app.use('/api/first-option', firstOptionsRouter)
+app.use('/api/first-options', firstOptionsRouter)
 
 //Second Option
-app.use('/api/second-option', secondOptionsRouter)
+app.use('/api/second-options', secondOptionsRouter)
 
 //Cheatsheet
 app.use('/api/cheat-sheets', cheatSheetsRouter)

@@ -1,8 +1,31 @@
 import React, { Component } from "react";
 import { Container, Row, Col, FormGroup, Label, Input } from "reactstrap";
 import "./MainPage.css";
+import axios from "axios";
 
 class MainPage extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      loading: false,
+      firstOptions: null,
+      secondOption: null,
+      cheatSheet: null
+    }
+    this.fetchFirstOption = this.fetchFirstOption.bind(this);
+  }
+
+  fetchFirstOption() {
+    axios.get("/api/first-options")
+      .then(response => response.data)
+      .then(firstOptions => this.setState({ firstOptions }))
+  }
+
+  componentDidMount() {
+    this.fetchFirstOption();
+  }
 
   render() {
     return (
@@ -22,11 +45,15 @@ class MainPage extends Component {
                 Here you can find THE command you need !
                 You're welcome. :')</p>
               <FormGroup>
-                <Label for="exampleSelect" className="mt-4 search">I want to:</Label>
+                <Label for="exampleSelect" className="mt-4 search">I want to :</Label>
                 <Input type="select" name="select" id="exampleSelect">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
+                  {
+                    this.state.firstOptions && this.state.firstOptions.map(firstOption => {
+                      return (
+                        <option key={firstOption.id}>{firstOption.value}</option>
+                      )
+                    })
+                  }
                 </Input>
               </FormGroup>
             </div>
