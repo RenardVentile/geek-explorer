@@ -13,7 +13,7 @@ class App extends Component {
         render={({ location, history }) => (
           <>
             <SideNav
-              style={{ background: "lightgrey" }}
+              style={{ background: "Lavender" }}
               onSelect={selected => {
                 const to = "/" + selected;
                 if (location.pathname !== to) {
@@ -27,10 +27,10 @@ class App extends Component {
                   <NavIcon>
                     <i
                       className="fab fa-linux"
-                      style={{ fontSize: "1.75em", color: "black" }}
+                      style={{ fontSize: "2em", color: "black", paddingTop: "0.4em" }}
                     />
                   </NavIcon>
-                  <NavText style={{ color: "white" }}>Unix</NavText>
+                  <NavText>Unix</NavText>
                 </NavItem>
               </Nav>
             </SideNav>
