@@ -27,7 +27,7 @@ class App extends Component {
                   <NavIcon>
                     <i
                       className="fab fa-linux"
-                      style={{ fontSize: "2em", color: "black", paddingTop: "0.4em" }}
+                      style={{ fontSize: "2em", color: "#20252d", paddingTop: "0.4em" }}
                     />
                   </NavIcon>
                   <NavText>Unix</NavText>
