@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Container, Row, Col, FormGroup, Label, Input } from "reactstrap";
 import "./MainPage.css";
 import axios from "axios";
-import Typist from "react-typist";
 
 class MainPage extends Component {
   constructor(props) {
