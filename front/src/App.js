@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import SideNav, { NavItem, NavIcon, NavText, Toggle, Nav } from "@trendmicro/react-sidenav";
+import { Route } from "react-router-dom";
+import SideNav, {
+  NavItem,
+  NavIcon,
+  NavText,
+  Toggle,
+  Nav
+} from "@trendmicro/react-sidenav";
 
 import MainPage from "./components/MainPage";
 
@@ -27,7 +33,11 @@ class App extends Component {
                   <NavIcon>
                     <i
                       className="fab fa-linux"
-                      style={{ fontSize: "2em", color: "#20252d", paddingTop: "0.4em" }}
+                      style={{
+                        fontSize: "2em",
+                        color: "#20252d",
+                        paddingTop: "0.4em"
+                      }}
                     />
                   </NavIcon>
                   <NavText>Unix</NavText>
