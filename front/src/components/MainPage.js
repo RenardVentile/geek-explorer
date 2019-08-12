@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Row, Col, FormGroup, Label, Input } from "reactstrap";
 import "./MainPage.css";
 import axios from "axios";
+import Typist from "react-typist";
 
 class MainPage extends Component {
   constructor(props) {
@@ -11,8 +12,7 @@ class MainPage extends Component {
       firstOptions: [],
       secondOptions: [],
       cheatSheets: [],
-      cheatSheet: null,
-      currentOption: "",
+      currentFirstOption: null,
       currentSecondOption: null,
       currentCheatSheet: null,
       showSecondOption: false
@@ -20,8 +20,7 @@ class MainPage extends Component {
     this.fetchFirstOption = this.fetchFirstOption.bind(this);
     this.fetchSecondOption = this.fetchSecondOption.bind(this);
     this.fetchCheatSheets = this.fetchCheatSheets.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.showCheatSheet = this.showCheatSheet.bind(this);
+    this.handleChangeFirstOption = this.handleChangeFirstOption.bind(this);
     this.handleChangeSecondOption = this.handleChangeSecondOption.bind(this);
   }
 
@@ -52,50 +51,46 @@ class MainPage extends Component {
     this.fetchCheatSheets();
   }
 
-  handleChange(currentOption) {
-    this.setState({
-      currentOption: this.state.firstOptions.find(
-        firstOption => firstOption.value === currentOption
-      )
-    });
-    const objectCurrentOption = this.state.firstOptions.filter(
-      firstOption => firstOption.value === currentOption
+  handleChangeFirstOption(currentValue) {
+    if (this.state.currentCheatSheet != null) {
+      this.setState({
+        currentCheatSheet: {}
+      });
+    }
+    const currentFirstOption = this.state.firstOptions.find(
+      firstOption => firstOption.value === currentValue
     );
-    if (objectCurrentOption[0].hasSecondOption === 1) {
-      const secondOptionsArray = this.state.secondOptions.filter(
-        secondOption => secondOption.firstOptionId === objectCurrentOption[0].id
-      );
 
-      this.setState({
-        showSecondOption: true,
-        secondOptionsToShow: secondOptionsArray
-      });
-    } else if (objectCurrentOption[0].hasSecondOption === 0) {
-      this.setState({
-        showSecondOption: false
-      });
-      this.showCheatSheet(
-        this.state.currentOption,
-        this.state.currentSecondOption
-      );
-    }
-  }
-
-  handleChangeSecondOption(currentSecondOption) {
     this.setState({
-      currentSecondOption: this.state.secondOptions.find(
-        secondOption => secondOption.value === currentSecondOption
-      )
+      currentFirstOption
     });
+
+    if (currentFirstOption.hasSecondOption === 1) {
+      this.setState({
+        showSecondOption: true
+      });
+    } else if (currentFirstOption.hasSecondOption === 0) {
+      const currentCheatSheet = this.state.cheatSheets.find(
+        cheatsheet => cheatsheet.firstOptionId === currentFirstOption.id
+      );
+      this.setState({
+        showSecondOption: false,
+        currentCheatSheet
+      });
+    }
   }
 
-  showCheatSheet(firstOption, secondOption) {
-    console.log(firstOption);
-    if (this.state.currentOption.hasSecondOption === 0) {
-      const cheatSheetSelected = this.state.cheatSheets.find(
-        cheatSheet => cheatSheet.firstOptionId === firstOption.id
-      );
-    }
+  handleChangeSecondOption(currentValue) {
+    const currentSecondOption = this.state.secondOptions.find(
+      secondOption => secondOption.value === currentValue
+    );
+    const currentCheatSheet = this.state.cheatSheets.find(
+      cheatsheet => cheatsheet.secondOptionId === currentSecondOption.id
+    );
+    this.setState({
+      currentSecondOption,
+      currentCheatSheet
+    });
   }
 
   render() {
@@ -125,8 +120,11 @@ class MainPage extends Component {
                   type="select"
                   name="select"
                   id="exampleSelect"
-                  onChange={event => this.handleChange(event.target.value)}
+                  onChange={event =>
+                    this.handleChangeFirstOption(event.target.value)
+                  }
                 >
+                  <option hidden>...</option>
                   {this.state.firstOptions &&
                     this.state.firstOptions.map(firstOption => {
                       return (
@@ -148,14 +146,21 @@ class MainPage extends Component {
                       this.handleChangeSecondOption(event.target.value)
                     }
                   >
+                    <option hidden>...</option>
                     {this.state.secondOptions &&
-                      this.state.secondOptionsToShow.map(secondOption => {
-                        return (
-                          <option key={secondOption.id}>
-                            {secondOption.value}
-                          </option>
-                        );
-                      })}
+                      this.state.secondOptions
+                        .filter(
+                          secondOption =>
+                            secondOption.firstOptionId ===
+                            this.state.currentFirstOption.id
+                        )
+                        .map(secondOption => {
+                          return (
+                            <option key={secondOption.id}>
+                              {secondOption.value}
+                            </option>
+                          );
+                        })}
                   </Input>
                 </FormGroup>
               )}
@@ -166,7 +171,10 @@ class MainPage extends Component {
             <div className="">
               <h2 className="h2">Usage</h2>
               <div className="usageContainer d-flex align-items-center">
-                <p className="usage ml-3 mb-0">{"git commit -m <message>"}</p>
+                <p className="usage ml-3 mb-0">
+                  {this.state.currentCheatSheet &&
+                    this.state.currentCheatSheet.value}
+                </p>
               </div>
             </div>
           </Col>
