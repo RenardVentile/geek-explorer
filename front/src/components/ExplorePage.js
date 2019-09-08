@@ -3,7 +3,7 @@ import { Container, Row, Col, FormGroup, Label, Input } from "reactstrap";
 import "./MainPage.css";
 import axios from "axios";
 
-class MainPage extends Component {
+class ExplorePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,7 +51,7 @@ class MainPage extends Component {
   }
 
   handleChangeFirstOption(currentValue) {
-    if (this.state.currentCheatSheet != null) {
+    if (this.state.currentCheatSheet !== null) {
       this.setState({
         currentCheatSheet: {}
       });
@@ -183,4 +183,4 @@ class MainPage extends Component {
   }
 }
 
-export default MainPage;
+export default ExplorePage;
