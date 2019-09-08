@@ -4,19 +4,21 @@ import { startCase } from "lodash";
 import { Container, Row, Col, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
 
+const initialState = {
+  error: null,
+  firstOptions: [],
+  secondOptions: [],
+  cheatSheets: [],
+  currentFirstOption: null,
+  currentSecondOption: null,
+  currentCheatSheet: null,
+  showSecondOption: false
+};
+
 class ExplorePage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      error: null,
-      firstOptions: [],
-      secondOptions: [],
-      cheatSheets: [],
-      currentFirstOption: null,
-      currentSecondOption: null,
-      currentCheatSheet: null,
-      showSecondOption: false
-    };
+    this.state = initialState;
     this.fetchFirstOption = this.fetchFirstOption.bind(this);
     this.fetchSecondOption = this.fetchSecondOption.bind(this);
     this.fetchCheatSheets = this.fetchCheatSheets.bind(this);
@@ -58,6 +60,7 @@ class ExplorePage extends Component {
     const prevCategory = prevProps.match.params.category;
     const category = this.props.match.params.category;
     if (prevCategory !== category) {
+      this.setState(initialState);
       this.componentDidMount();
     }
   }
