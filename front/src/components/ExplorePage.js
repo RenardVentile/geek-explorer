@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./MainPage.css";
+import "./ExplorePage.css";
 import { startCase } from "lodash";
 import { Container, Row, Col, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
@@ -12,7 +12,8 @@ const initialState = {
   currentFirstOption: null,
   currentSecondOption: null,
   currentCheatSheet: null,
-  showSecondOption: false
+  showSecondOption: false,
+  showDetail: false
 };
 
 class ExplorePage extends Component {
@@ -81,7 +82,8 @@ class ExplorePage extends Component {
 
     if (currentFirstOption.hasSecondOption === 1) {
       this.setState({
-        showSecondOption: true
+        showSecondOption: true,
+        showDetail: false
       });
     } else if (currentFirstOption.hasSecondOption === 0) {
       const currentCheatSheet = this.state.cheatSheets.find(
@@ -89,6 +91,7 @@ class ExplorePage extends Component {
       );
       this.setState({
         showSecondOption: false,
+        showDetail: true,
         currentCheatSheet
       });
     }
@@ -103,7 +106,8 @@ class ExplorePage extends Component {
     );
     this.setState({
       currentSecondOption,
-      currentCheatSheet
+      currentCheatSheet,
+      showDetail: true
     });
   }
 
@@ -178,8 +182,8 @@ class ExplorePage extends Component {
             </div>
           </Col>
 
-          <Col lg="6" sm="10" className="mt-4 offset-1">
-            <div className="">
+          <Col lg="6" sm="10" className="mt-3 offset-1">
+            <div>
               <h2 className="h2">Usage</h2>
               <div className="usageContainer d-flex align-items-center">
                 <p className="usage ml-3 mb-0">
@@ -188,6 +192,19 @@ class ExplorePage extends Component {
                 </p>
               </div>
             </div>
+
+            {this.state.showDetail &&
+              this.state.currentCheatSheet.details !== null && (
+                <div>
+                  <h2 className="h2 mt-4">Note</h2>
+                  <div className="detailContainer pt-3">
+                    <p className="usage ml-3 mb-0">
+                      {this.state.currentCheatSheet &&
+                        this.state.currentCheatSheet.details}
+                    </p>
+                  </div>
+                </div>
+              )}
           </Col>
         </Row>
       </Container>
