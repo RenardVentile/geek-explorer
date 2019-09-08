@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
-
-import ClickOutside from "react-click-outside";
 import { Route } from "react-router-dom";
 import SideNav, {
   NavItem,
@@ -12,7 +10,7 @@ import SideNav, {
   Nav
 } from "@trendmicro/react-sidenav";
 
-import ExplorePage from "./components/ExplorePage";
+import ExploreContainer from "./containers/ExploreContainer";
 import HomePage from "./components/HomePage";
 
 class App extends Component {
@@ -77,7 +75,7 @@ class App extends Component {
             <main>
               <Route path="/" exact component={HomePage} />
               <Route path="/home" component={HomePage} />
-              <Route path="/explore/:category" component={ExplorePage} />
+              <Route path="/explore/:category" component={ExploreContainer} />
             </main>
           </>
         )}
