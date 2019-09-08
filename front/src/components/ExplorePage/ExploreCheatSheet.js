@@ -1,9 +1,8 @@
 import React from "react";
-import { Col } from "reactstrap";
 
 const ExploreCheatSheet = ({ showDetail, currentCheatSheet }) => {
   return (
-    <Col lg="6" sm="10" className="mt-3 offset-1">
+    <>
       <div>
         <h2 className="h2">Usage</h2>
         <div className="usageContainer d-flex align-items-center">
@@ -23,7 +22,7 @@ const ExploreCheatSheet = ({ showDetail, currentCheatSheet }) => {
           </div>
         </div>
       )}
-    </Col>
+    </>
   );
 };
 

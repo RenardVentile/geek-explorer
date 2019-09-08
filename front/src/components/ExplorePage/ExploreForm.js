@@ -1,16 +1,13 @@
 import React from "react";
-import { startCase } from "lodash";
-import { Col, FormGroup, Label, Input } from "reactstrap";
+import { FormGroup, Label, Input } from "reactstrap";
 
 const ExploreForm = ({
   handleChangeFirstOption,
   handleChangeSecondOption,
-  category,
   state
 }) => {
   return (
-    <Col lg="4" sm="10" className="mt-4 offset-1">
-      <h2 className="h2">{startCase(category)}</h2>
+    <>
       <FormGroup>
         <Label for="exampleSelect" className="mt-4 search">
           I want to :
@@ -52,7 +49,7 @@ const ExploreForm = ({
           </Input>
         </FormGroup>
       )}
-    </Col>
+    </>
   );
 };
 
