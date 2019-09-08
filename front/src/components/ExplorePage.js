@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Container, Row, Col, FormGroup, Label, Input } from "reactstrap";
 import "./MainPage.css";
+import { startCase } from "lodash";
+import { Container, Row, Col, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
 
 class ExplorePage extends Component {
@@ -24,22 +25,25 @@ class ExplorePage extends Component {
   }
 
   fetchFirstOption() {
+    let category = this.props.match.params.category;
     axios
-      .get("/api/first-options")
+      .get(`/api/categories/${category}/first-options`)
       .then(response => response.data)
       .then(firstOptions => this.setState({ firstOptions }));
   }
 
   fetchSecondOption() {
+    let category = this.props.match.params.category;
     axios
-      .get("/api/second-options")
+      .get(`/api/categories/${category}/second-options`)
       .then(response => response.data)
       .then(secondOptions => this.setState({ secondOptions }));
   }
 
   fetchCheatSheets() {
+    let category = this.props.match.params.category;
     axios
-      .get("/api/cheat-sheets")
+      .get(`/api/categories/${category}/cheat-sheets`)
       .then(response => response.data)
       .then(cheatSheets => this.setState({ cheatSheets }));
   }
@@ -93,6 +97,8 @@ class ExplorePage extends Component {
   }
 
   render() {
+    const category = this.props.match.params.category;
+    // console.log(this.state);
     return (
       <Container>
         <Row className="ml-3 mt-5">
@@ -106,11 +112,7 @@ class ExplorePage extends Component {
         <Row className="ml-3 mt-5">
           <Col lg="4" sm="10" className="mt-4 offset-1">
             <div className="">
-              <h2 className="h2">Unix explorer</h2>
-              <p className="">
-                Welcome dude, want some unix's stuff ? Here you can find THE
-                command you need ! You're welcome. :')
-              </p>
+              <h2 className="h2">{startCase(category)}</h2>
               <FormGroup>
                 <Label for="exampleSelect" className="mt-4 search">
                   I want to :
