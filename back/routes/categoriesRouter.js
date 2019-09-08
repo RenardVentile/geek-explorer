@@ -38,7 +38,7 @@ router.get("/:category", (req, res) => {
 router.get("/:category/first-options", (req, res) => {
   const category = req.params.category;
   db.query(
-    "SELECT * from category INNER JOIN first_option ON category.id = first_option.categoryId",
+    "SELECT * from category LEFT JOIN first_option ON category.id = first_option.categoryId WHERE category.label = ?",
     category,
     (err, categories) => {
       if (err) {
@@ -55,7 +55,7 @@ router.get("/:category/first-options", (req, res) => {
 router.get("/:category/second-options", (req, res) => {
   const category = req.params.category;
   db.query(
-    "SELECT * from category INNER JOIN second_option ON category.id = second_option.categoryId",
+    "SELECT * from category LEFT JOIN second_option ON category.id = second_option.categoryId WHERE category.label = ?",
     category,
     (err, categories) => {
       if (err) {
@@ -72,7 +72,7 @@ router.get("/:category/second-options", (req, res) => {
 router.get("/:category/cheat-sheets", (req, res) => {
   const category = req.params.category;
   db.query(
-    "SELECT * from category INNER JOIN cheat_sheet ON category.id = cheat_sheet.categoryId",
+    "SELECT * from category LEFT JOIN cheat_sheet ON category.id = cheat_sheet.categoryId WHERE category.label = ?",
     category,
     (err, categories) => {
       if (err) {

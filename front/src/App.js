@@ -21,65 +21,59 @@ class App extends Component {
       <Route
         render={({ location, history }) => (
           <>
-            <ClickOutside
-              onClickOutside={() => {
-                this.setState({ expanded: false });
+            <SideNav
+              style={{ background: "Lavender" }}
+              onSelect={selected => {
+                const to = "/" + selected;
+                if (location.pathname !== to) {
+                  history.push(to);
+                }
               }}
             >
-              <SideNav
-                style={{ background: "Lavender" }}
-                onSelect={selected => {
-                  const to = "/" + selected;
-                  if (location.pathname !== to) {
-                    history.push(to);
-                  }
-                }}
-              >
-                <Toggle />
+              <Toggle />
 
-                <Nav>
-                  <NavItem eventKey="home">
-                    <NavIcon>
-                      <i
-                        className="fas fa-home"
-                        style={{
-                          fontSize: "2em",
-                          color: "#20252d",
-                          paddingTop: "0.4em"
-                        }}
-                      />
-                    </NavIcon>
-                    <NavText>Home</NavText>
-                  </NavItem>
-                  <NavItem eventKey="explore/unix">
-                    <NavIcon>
-                      <i
-                        className="fas fa-terminal"
-                        style={{
-                          fontSize: "2em",
-                          color: "#20252d",
-                          paddingTop: "0.4em"
-                        }}
-                      />
-                    </NavIcon>
-                    <NavText>Unix</NavText>
-                  </NavItem>
-                  <NavItem eventKey="explore/pc-shortcuts">
-                    <NavIcon>
-                      <i
-                        className="fas fa-laptop"
-                        style={{
-                          fontSize: "2em",
-                          color: "#20252d",
-                          paddingTop: "0.4em"
-                        }}
-                      />
-                    </NavIcon>
-                    <NavText>PC shortcuts</NavText>
-                  </NavItem>
-                </Nav>
-              </SideNav>
-            </ClickOutside>
+              <Nav>
+                <NavItem eventKey="home">
+                  <NavIcon>
+                    <i
+                      className="fas fa-home"
+                      style={{
+                        fontSize: "2em",
+                        color: "#20252d",
+                        paddingTop: "0.4em"
+                      }}
+                    />
+                  </NavIcon>
+                  <NavText>Home</NavText>
+                </NavItem>
+                <NavItem eventKey="explore/unix">
+                  <NavIcon>
+                    <i
+                      className="fas fa-terminal"
+                      style={{
+                        fontSize: "2em",
+                        color: "#20252d",
+                        paddingTop: "0.4em"
+                      }}
+                    />
+                  </NavIcon>
+                  <NavText>Unix</NavText>
+                </NavItem>
+                <NavItem eventKey="explore/pc-shortcuts">
+                  <NavIcon>
+                    <i
+                      className="fas fa-laptop"
+                      style={{
+                        fontSize: "2em",
+                        color: "#20252d",
+                        paddingTop: "0.4em"
+                      }}
+                    />
+                  </NavIcon>
+                  <NavText>PC shortcuts</NavText>
+                </NavItem>
+              </Nav>
+            </SideNav>
             <main>
               <Route path="/" exact component={HomePage} />
               <Route path="/home" component={HomePage} />

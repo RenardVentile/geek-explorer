@@ -54,6 +54,14 @@ class ExplorePage extends Component {
     this.fetchCheatSheets();
   }
 
+  componentDidUpdate(prevProps) {
+    const prevCategory = prevProps.match.params.category;
+    const category = this.props.match.params.category;
+    if (prevCategory !== category) {
+      this.componentDidMount();
+    }
+  }
+
   handleChangeFirstOption(currentValue) {
     if (this.state.currentCheatSheet !== null) {
       this.setState({
@@ -98,7 +106,6 @@ class ExplorePage extends Component {
 
   render() {
     const category = this.props.match.params.category;
-    // console.log(this.state);
     return (
       <Container>
         <Row className="ml-3 mt-5">
