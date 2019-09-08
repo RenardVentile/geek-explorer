@@ -10,15 +10,26 @@ import SideNav, {
   Nav
 } from "@trendmicro/react-sidenav";
 
+import FacebookLogin from "react-facebook-login";
+
 import ExploreContainer from "./containers/ExploreContainer";
 import HomePage from "./components/HomePage";
 
 class App extends Component {
   render() {
+    const responseFacebook = response => {
+      console.log(response);
+    };
+
     return (
       <Route
         render={({ location, history }) => (
           <>
+            <FacebookLogin
+              appId="915447162166334"
+              fields="name,email,picture"
+              callback={responseFacebook}
+            />
             <SideNav
               style={{ background: "Lavender" }}
               onSelect={selected => {
