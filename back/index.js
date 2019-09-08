@@ -14,17 +14,17 @@ app.get("/", function(req, res) {
   res.send("Welcome on GeekExplorer API");
 });
 
-// //First Option
-// app.use('/api/first-options', firstOptionsRouter)
-
-// //Second Option
-// app.use('/api/second-options', secondOptionsRouter)
-
-// //Cheatsheet
-// app.use('/api/cheat-sheets', cheatSheetsRouter)
-
 //Categories
 app.use("/api/categories", categoriesRouter);
+
+// First Options
+app.use("/api/categories/", firstOptionsRouter);
+
+// Second Options
+app.use("/api/categories/", secondOptionsRouter);
+
+// Cheat Sheets
+app.use("/api/categories/", cheatSheetsRouter);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
